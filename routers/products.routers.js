@@ -6,22 +6,17 @@ import {
   updateProductById,
   deleteProductById,
 } from "../controllers/products.controller.js";
-import validateBody from "../middleware/validator.middleware.js";
-import {
-  createProductSchema,
-  updateProductSchema,
-} from "../schemas/products.schema.js";
+import { validateSchema } from "../middleware/validate.schema.js";
+import { createProductSchema } from "../schemas/products.schema.js";
 
 const productsRouters = express.Router();
 
 productsRouters.get("/", getProducts);
 productsRouters.get("/:id", getProductsById);
-productsRouters.post("/", validateBody(createProductSchema), createProduct);
-productsRouters.put(
-  "/:id",
-  validateBody(updateProductSchema),
-  updateProductById,
-);
+
+productsRouters.post("/", validateSchema(createProductSchema), createProduct);
+
+productsRouters.put("/:id", updateProductById);
 productsRouters.delete("/:id", deleteProductById);
 
 export default productsRouters;
