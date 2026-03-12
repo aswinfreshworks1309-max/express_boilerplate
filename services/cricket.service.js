@@ -85,42 +85,112 @@ const deleteScore = async (id) => {
 
 /**
  * Aggregation Training Placeholders
- * // todo: Implement these during the interactive session
  */
 
 // 1. Find all players in the dataset.
 const findAllPlayers = async () => {
   // todo:
+  return await client
+    .db(MONGO_DATABASE)
+    .collection("world_cup")
+    .find(
+      {},
+      {
+        projection: { name: 1, _id: 0 },
+      },
+    )
+    .toArray();
 };
 
 // 2. Find players from the India team.
 const findIndiaPlayers = async () => {
   // todo:
+  return await client
+    .db(MONGO_DATABASE)
+    .collection("world_cup")
+    .find(
+      {
+        team: "India",
+      },
+      {
+        projection: {
+          name: 1,
+        },
+      },
+    )
+    .toArray();
 };
 
 // 3. Find players who scored more than 60 runs.
 const findHighScorers = async () => {
   // todo:
+  return await client
+    .db(MONGO_DATABASE)
+    .collection("world_cup")
+    .find(
+      {
+        runs: { $gt: 60 },
+      },
+      {
+        projection: {
+          name: true,
+          runs: 1,
+        },
+      },
+    )
+    .toArray();
 };
 
 // 4. Find players who faced fewer than 40 balls.
 const findQuickBatters = async () => {
-  // todo:
+  return await client
+    .db(MONGO_DATABASE)
+    .collection("world_cup")
+    .find(
+      {
+        balls: { $lt: 40 },
+      },
+      {
+        projection: {
+          name: true,
+          balls: 1,
+        },
+      },
+    )
+    .toArray();
 };
 
 // 5. Find players who hit more than 2 sixes.
 const findPowerHitters = async () => {
-  // todo:
+  return await client
+    .db(MONGO_DATABASE)
+    .collection("world_cup")
+    .find({
+      sixes: { $gt: 2 },
+    })
+    .toArray();
 };
 
 // 6. Display only the player's name and runs (projection).
 const getPlayerNameAndRuns = async () => {
-  // todo:
+  return await client
+    .db(MONGO_DATABASE)
+    .collection("world_cup")
+    .find({
+      projection: { name: 1, runs: 1 },
+    })
+    .toArray();
 };
 
 // 7. Find players from Australia OR England.
 const findAusOrEngPlayers = async () => {
-  // todo:
+  return await client
+    .db(MONGO_DATABASE)
+    .collection("world_cup")
+    .find({
+      $or: [{ team: "Australia" }, { team: "England" }],
+    })
+    .toArray();
 };
 
 // 8. Show the Top 3 run scorers.
@@ -135,7 +205,13 @@ const getPlayerMostBalls = async () => {
 
 // 10. Calculate the total runs scored by all players.
 const getTotalRunsAll = async () => {
-  // todo:
+  return await client
+    .db(MONGO_DATABASE)
+    .collection("world_cup")
+    .find({
+      runs: { $sum: 1 },
+    })
+    .toArray();
 };
 
 // 11. Calculate the average runs scored.
