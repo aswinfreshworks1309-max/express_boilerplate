@@ -1,5 +1,5 @@
 export const config = {
-  database: "b61-express",
+  database: "test",
 };
 
 export default config;
