@@ -12,6 +12,8 @@ const MONGO_URL = process.env.MONGO_URL;
 export const client = new MongoClient(MONGO_URL);
 await client.connect();
 
+
+
 // installing middleware
 app.use(express.json());
 app.use(cors());
